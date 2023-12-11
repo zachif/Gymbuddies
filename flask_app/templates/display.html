@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>
+            About {{host['first_name']}}'s training plan:
+        </h1>
+    </div>
+    <div>
+        <h2>What:</h2>
+        <p>{{plan['workout_plan']}}</p>
+        <h2>When:</h2>
+        <p>{{plan['schedule']}}</p>
+        <h2>Where:</h2>
+        <p>{{plan['gym_name']}}</p>
+        <p>Address: {{plan['address']}}</p>
+        <p>City: {{plan['city']}}</p>
+        <p>State: {{plan['state']}}</p>
+        <p>Zip Code: {{plan['zip_code']}}</p>
+    </div>
+    {%if buddy%}
+        <h2>{{buddy[0]['first_name']}} has joined this training plan.</h2>
+    {%else%}
+        {%if user_id != host['id']%}
+        <a href="#">Join {{host['first_name']}}'s training plan</a>
+        {%endif%}
+    {%endif%}
+</body>
+</html>

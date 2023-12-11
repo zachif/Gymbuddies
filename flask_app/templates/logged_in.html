@@ -36,7 +36,7 @@
         </table>
         {% else %}
         <h2> You haven't created a workout plan yet.</h2>
-        <a href="/GymBuddies/create">Create a Plan</a>
+        <a href="/GymBuddies/display/{{plan['id']}}">Create a Plan</a>
         {% endif %}
         <h3>Joined</h3>
         {% if buddy_plans%}
@@ -60,7 +60,7 @@
                 <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
                 <td>{{plan['workout_plan']}}</td>
                 <td>{{plan['schedule']}}</td>
-                <td><a href="#">Join this plan</a></td>
+                <td><a href="/GymBuddies/display/{{plan['id']}}">Join this plan</a></td>
             </tr>
             {% endfor %}
         </table>
@@ -92,7 +92,7 @@
                 <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
                 <td>{{plan['workout_plan']}}</td>
                 <td>{{plan['schedule']}}</td>
-                <td><a href="#">Join this plan</a></td>
+                <td><a href="/GymBuddies/display/{{plan['id']}}">Join this plan</a></td>
             </tr>
             {% endfor %}
         </table>

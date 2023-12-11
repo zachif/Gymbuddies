@@ -22,3 +22,14 @@ def create():
     print('_________________________________________________________')
     print (valid)
     return redirect("/GymBuddies/dashboard")
+
+@app.route('/GymBuddies/display/<int:plan_id>')
+def display(plan_id):
+    data={'id':plan_id}
+    result=Workout_Plans.get_workout_by_id(data)
+    print (result)
+    result=Workout_Plans.get_workout_host(data)
+    print (result)
+    result=Workout_Plans.get_workout_buddy(data)
+    print (result)
+    return render_template("display.html", user_id=session["id"],plan=(Workout_Plans.get_workout_by_id(data))[0], host=(Workout_Plans.get_workout_host(data))[0], buddy=(Workout_Plans.get_workout_buddy(data)))
