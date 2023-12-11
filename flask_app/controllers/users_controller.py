@@ -4,7 +4,7 @@ from flask_app.models.users_model import Users
 from flask_app.models.workout_plans_model import Workout_Plans
 
 
-@app.route('/')
+@app.route('/GymBuddies')
 def home():
     return render_template('index.html')
 
@@ -20,7 +20,7 @@ def register():
     valid=Users.register_user(data)
     print('_________________________________________________________')
     print (valid)
-    return redirect('/')
+    return redirect('/GymBuddies')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -32,14 +32,14 @@ def login():
     if not current_user:
         return redirect('/')
     session['id']=current_user
-    return redirect('/dashboard')
+    return redirect('/GymBuddies/dashboard')
 
-@app.route('/dashboard')
+@app.route('/GymBuddies/dashboard')
 def dashboard():
-    return render_template('logged_in.html', first_name=Users.get_user_by_id(session), host_plans=Workout_Plans.get_workouts_by_host(session), buddy_plans=Workout_Plans.get_workouts_by_buddy(session))
+    return render_template('logged_in.html', first_name=Users.get_user_by_id(session), host_plans=Workout_Plans.get_workouts_by_host(session), buddy_plans=Workout_Plans.get_workouts_by_buddy(session), nobuddy_plans=Workout_Plans.get_workouts_without_buddy(session))
 
 @app.route('/logout', methods=['POST'])
 def logout():
     session.pop('id')
     print("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-")
-    return redirect('/')
+    return redirect('/GymBuddies')

@@ -44,7 +44,7 @@ class Workout_Plans:
             flash("Schedule must be between 20 and 500 characters.")
             valid=False
         if valid:
-            result=connectToMySQL(db).query_db("INSERT INTO workout_plan (id, host_id, gym_name, workout_plan, address, city, state, zip_code, schedule, created_at, updated_at, buddy_id) VALUES (%(id)s, %(host_id)s, %(gym_name)s, %(workout_plan)s, %(address)s, %(city)s, %(state)s, %(zip_code)s, %(schedule)s, %(created_at)s, %(updated_at)s, %(buddy_id)s)", data)
+            result=connectToMySQL(db).query_db("INSERT INTO workout_plan (host_id, gym_name, workout_plan, address, city, state, zip_code, schedule) VALUES (%(host_id)s, %(gym_name)s, %(workout_plan)s, %(address)s, %(city)s, %(state)s, %(zip_code)s, %(schedule)s)", data)
             print('_____________________________________________________')
             print(result)
             return valid
@@ -58,8 +58,8 @@ class Workout_Plans:
         return connectToMySQL(db).query_db("SELECT * FROM workout_plan WHERE buddy_id=%(id)s", data)
     
     @classmethod
-    def get_workouts_without_buddy(cls):
-        return connectToMySQL(db).query_db("SELECT * FROM workout_plan WHERE buddy_id = Null")
+    def get_workouts_without_buddy(cls, data):
+        return connectToMySQL(db).query_db("SELECT * FROM workout_plan WHERE (buddy_id is null) AND (host_id != %(id)s)", data)
     
     @classmethod
     def add_buddy(cls, data):

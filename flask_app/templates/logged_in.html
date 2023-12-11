@@ -12,7 +12,8 @@
     </form>
     <div>
         <h2>Your Plans</h2>
-        {% if host_plans%}
+        <h3>Created</h3>
+        {% if host_plans %}
         <table>
             <thead>
                 <th>
@@ -34,11 +35,10 @@
             {% endfor %}
         </table>
         {% else %}
-        <h2> You haven't created any workout plans yet</h2>
+        <h2> You haven't created a workout plan yet.</h2>
+        <a href="/GymBuddies/create">Create a Plan</a>
         {% endif %}
-        <a>Create a Plan</a>
-    </div>
-    <div>
+        <h3>Joined</h3>
         {% if buddy_plans%}
         <table>
             <thead>
@@ -60,12 +60,44 @@
                 <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
                 <td>{{plan['workout_plan']}}</td>
                 <td>{{plan['schedule']}}</td>
-                <td><a>Join this plan</a></td>
+                <td><a href="#">Join this plan</a></td>
             </tr>
             {% endfor %}
         </table>
         {% else %}
-        <h2> You haven't created any workout plans yet</h2>
+        <h2>You haven't joined  any plans yet.</h2>
+        {% endif %}
+
+    </div>
+    <div>
+        <h2>Plans from other Users</h2>
+        {% if nobuddy_plans%}
+        <table>
+            <thead>
+                <th>
+                    Gym
+                </th>
+                <th> 
+                    Routine/Split
+                </th>
+                <th>
+                    Weekly Schedule
+                </th>
+                <th>
+                    Join
+                </th>
+            </thead>
+            {% for plan in nobuddy_plans %}
+            <tr>
+                <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
+                <td>{{plan['workout_plan']}}</td>
+                <td>{{plan['schedule']}}</td>
+                <td><a href="#">Join this plan</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>There are no user created plans yet.</h2>
         {% endif %}
     </div>
 </body>
