@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.users_model import Users
+from flask_app.models.workout_plans_model import Workout_Plans
 
 
 @app.route('/')
@@ -35,7 +36,7 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('logged_in.html', first_name=Users.get_user_by_id(session))
+    return render_template('logged_in.html', first_name=Users.get_user_by_id(session), host_plans=Workout_Plans.get_workouts_by_host(session), buddy_plans=Workout_Plans.get_workouts_by_buddy(session))
 
 @app.route('/logout', methods=['POST'])
 def logout():

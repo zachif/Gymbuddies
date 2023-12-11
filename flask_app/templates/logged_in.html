@@ -10,5 +10,63 @@
     <form action="/logout" method="post">
         <input type="submit" value="Logout">
     </form>
+    <div>
+        <h2>Your Plans</h2>
+        {% if host_plans%}
+        <table>
+            <thead>
+                <th>
+                    Gym
+                </th>
+                <th> 
+                    Routine/Split
+                </th>
+                <th>
+                    Weekly Schedule
+                </th>
+            </thead>
+            {% for plan in host_plans %}
+            <tr>
+                <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
+                <td>{{plan['workout_plan']}}</td>
+                <td>{{plan['schedule']}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2> You haven't created any workout plans yet</h2>
+        {% endif %}
+        <a>Create a Plan</a>
+    </div>
+    <div>
+        {% if buddy_plans%}
+        <table>
+            <thead>
+                <th>
+                    Gym
+                </th>
+                <th> 
+                    Routine/Split
+                </th>
+                <th>
+                    Weekly Schedule
+                </th>
+                <th>
+                    Join
+                </th>
+            </thead>
+            {% for plan in buddy_plans %}
+            <tr>
+                <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
+                <td>{{plan['workout_plan']}}</td>
+                <td>{{plan['schedule']}}</td>
+                <td><a>Join this plan</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2> You haven't created any workout plans yet</h2>
+        {% endif %}
+    </div>
 </body>
 </html>
