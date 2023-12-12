@@ -27,6 +27,6 @@ class Messages:
 
     @classmethod
     def get_messages_by_plan(cls, data):
-        result=connectToMySQL(db).query_db("SELECT * FROM messages WHERE plan_id=%(plan_id)s", data)
+        result=connectToMySQL(db).query_db("SELECT * FROM messages WHERE plan_id=%(id)s", data)
         print(result)
         return result

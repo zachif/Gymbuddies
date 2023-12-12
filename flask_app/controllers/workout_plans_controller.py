@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.workout_plans_model import Workout_Plans
+from flask_app.models.messages_model import Messages
 
 @app.route('/GymBuddies/create')
 def createform():
@@ -32,7 +33,9 @@ def display(plan_id):
     print (result)
     result=Workout_Plans.get_workout_buddy(data)
     print (result)
-    return render_template("display.html", user_id=session["id"],plan=(Workout_Plans.get_workout_by_id(data))[0], host=(Workout_Plans.get_workout_host(data))[0], buddy=(Workout_Plans.get_workout_buddy(data)))
+    result=Messages.get_messages_by_plan(data)
+    print (result)
+    return render_template("display.html", user_id=session["id"],plan=(Workout_Plans.get_workout_by_id(data))[0], host=(Workout_Plans.get_workout_host(data))[0], buddy=(Workout_Plans.get_workout_buddy(data)), messages=(Messages.get_messages_by_plan(data)))
 
 @app.route('/GymBuddies/add/<int:plan_id>')
 def addBuddy(plan_id):
@@ -49,6 +52,7 @@ def removeBuddy(plan_id):
         "plan_id":plan_id
     }
     result=Workout_Plans.remove_buddy(data)
+    result=Messages.delete_messages_by_plan(data)
     return redirect('/GymBuddies/display/' + str(plan_id))
 
 @app.route('/GymBuddies/edit/<int:plan_id>')

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <a href="/GymBuddies/dashboard">Dashboard</a>
     <div>
@@ -24,14 +26,47 @@
         <p>State: {{plan['state']}}</p>
         <p>Zip Code: {{plan['zip_code']}}</p>
     </div>
+
     {%if buddy%}
-        <a href="/GymBuddies/remove/{{plan['id']}}">Leave {{host['first_name']}}'s Plan</a>
-    {%else%}
-        {%if user_id != host['id']%}
-        <a href="/GymBuddies/add/{{plan['id']}}">Join {{host['first_name']}}'s training plan</a>
+    <div>
+        <h2>Messages</h2>
+        {%if messages%}
+        {% for message in messages %}
+        {%if message['sender']=="host"%}
+        <div style="color: rgb(3, 128, 101)" class="hostMessage">{{message[content]}}</div>
         {%else%}
-        <a href="/GymBuddies/edit/{{plan['id']}}">edit</a>
+        <div style="color: rgb(255, 187, 0)" class="buddyMessage">{{message[content]}}</div>
         {%endif%}
+        {%endfor%}
+        {%endif%}
+    </div>
+    {%if user_id != host['id']%}
+    <form action="/GymBuddies/message/host/{{plan['id']}}" method="post">
+        <div>
+            <textarea name="content" rows="1" cols="20" placeholder="message"></textarea>
+            <input type="submit" value="send" />
+        </div>
+    </form>
+    {%else%}
+    <form action="/GymBuddies/message/host/{{plan['id']}}" method="post">
+        <div>
+            <textarea name="content" rows="1" cols="20" placeholder="message"></textarea>
+            <input type="submit" value="send" />
+        </div>
+    </form>
+    {%endif%}
+    {%endif%}
+
+
+    {%if buddy%}
+    <a href="/GymBuddies/remove/{{plan['id']}}">Leave {{host['first_name']}}'s Plan</a>
+    {%else%}
+    {%if user_id != host['id']%}
+    <a href="/GymBuddies/add/{{plan['id']}}">Join {{host['first_name']}}'s training plan</a>
+    {%else%}
+    <a href="/GymBuddies/edit/{{plan['id']}}">edit</a>
+    {%endif%}
     {%endif%}
 </body>
+
 </html>
