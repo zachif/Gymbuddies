@@ -1,108 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../static/logged_in.css">
 </head>
-<body>
-    <h2>Welcome {{first_name[0]['first_name']}}!!!!!</h2>
-    <form action="/logout" method="post">
-        <input type="submit" value="Logout">
-    </form>
-    <div>
-        <h2>Your Plans</h2>
-        <h3>Created</h3>
-        {% if host_plans %}
-        <table>
-            <thead>
-                <th>
-                    Where
-                </th>
-                <th> 
-                    What
-                </th>
-                <th>
-                    When
-                </th>
-                <th>
-                    Display
-                </th>
-            </thead>
-            {% for plan in host_plans %}
-            <tr>
-                <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
-                <td>{{plan['workout_plan']}}</td>
-                <td>{{plan['schedule']}}</td>
-                <td><a href="/GymBuddies/display/{{plan['id']}}">View Your plan</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        <h2> You haven't created a workout plan yet.</h2>
-        <a href="/GymBuddies/create">Create a Plan</a>
-        {% endif %}
-        <h3>Joined</h3>
-        {% if buddy_plans%}
-        <table>
-            <thead>
-                <th>
-                    Where
-                </th>
-                <th> 
-                    What
-                </th>
-                <th>
-                    When
-                </th>
-                <th>
-                    Display
-                </th>
-            </thead>
-            {% for plan in buddy_plans %}
-            <tr>
-                <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
-                <td>{{plan['workout_plan']}}</td>
-                <td>{{plan['schedule']}}</td>
-                <td><a href="/GymBuddies/display/{{plan['id']}}">View this plan</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        <h3>You haven't joined  any plans yet.</h3>
-        {% endif %}
 
+<body>
+    <div class="welcome_bar">
+        <h2>Welcome {{first_name[0]['first_name']}}!!!!!</h2>
+        <form action="/logout" method="post">
+            <input class="submit_button" type="submit" value="Logout">
+        </form>
     </div>
     <div>
-        <h2>Plans from other Users</h2>
-        {% if nobuddy_plans%}
-        <table>
-            <thead>
-                <th>
-                    Where
-                </th>
-                <th> 
-                    What
-                </th>
-                <th>
-                    When
-                </th>
-                <th>
-                    Join
-                </th>
-            </thead>
-            {% for plan in nobuddy_plans %}
-            <tr>
-                <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
-                <td>{{plan['workout_plan']}}</td>
-                <td>{{plan['schedule']}}</td>
-                <td><a href="/GymBuddies/display/{{plan['id']}}">Join this plan</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        <h3>There are no user created plans avaible to join.</h3>
-        {% endif %}
+        <h2 class="table_group_title">Your Plans</h2>
+        <div class="table_container_container">
+            <div class="table_container">
+                <h2>Created</h2>
+                {% if host_plans %}
+                <table>
+                    <thead>
+                        <th>
+                            Where
+                        </th>
+                        <th>
+                            What
+                        </th>
+                        <th>
+                            When
+                        </th>
+                        <th>
+                            Display
+                        </th>
+                    </thead>
+                    {% for plan in host_plans %}
+                    <tr>
+                        <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
+                        <td>{{plan['workout_plan']}}</td>
+                        <td>{{plan['schedule']}}</td>
+                        <td><a href="/GymBuddies/display/{{plan['id']}}">View Your plan</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <h2> You haven't created a workout plan yet.</h2>
+                <a href="/GymBuddies/create">Create a Plan</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="table_container_container">
+            <div class="table_container">
+                <h2>Joined</h2>
+                {% if buddy_plans%}
+                <table>
+                    <thead>
+                        <th>
+                            Where
+                        </th>
+                        <th>
+                            What
+                        </th>
+                        <th>
+                            When
+                        </th>
+                        <th>
+                            Display
+                        </th>
+                    </thead>
+                    {% for plan in buddy_plans %}
+                    <tr>
+                        <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
+                        <td>{{plan['workout_plan']}}</td>
+                        <td>{{plan['schedule']}}</td>
+                        <td><a href="/GymBuddies/display/{{plan['id']}}">View this plan</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <h3>You haven't joined any plans yet.</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="table_group_title">Plans from other Users</h2>
+        <div class="table_container_container">
+            <div class="table_container">
+                {% if nobuddy_plans%}
+                <table>
+                    <thead>
+                        <th>
+                            Where
+                        </th>
+                        <th>
+                            What
+                        </th>
+                        <th>
+                            When
+                        </th>
+                        <th>
+                            Join
+                        </th>
+                    </thead>
+                    {% for plan in nobuddy_plans %}
+                    <tr>
+                        <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
+                        <td>{{plan['workout_plan']}}</td>
+                        <td>{{plan['schedule']}}</td>
+                        <td><a href="/GymBuddies/display/{{plan['id']}}">Join this plan</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <h3>There are no user created plans avaible to join.</h3>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
