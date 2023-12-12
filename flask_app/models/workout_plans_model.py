@@ -81,3 +81,11 @@ class Workout_Plans:
         buddy = connectToMySQL(db).query_db("SELECT * FROM users WHERE id = %(buddy_id)s",(connectToMySQL(db).query_db("SELECT buddy_id FROM workout_plan WHERE id = %(id)s", data)[0]))
         print(buddy)
         return buddy
+
+    @classmethod
+    def remove_buddy(cls, data):
+        return connectToMySQL(db).query_db("UPDATE workout_plan SET buddy_id = NULL WHERE id=%(plan_id)s", data)
+    
+    @classmethod
+    def update_plan(cls, data):
+        return connectToMySQL(db).query_db("UPDATE workout_plan SET gym_name = %(gym_name)s, address = %(address)s, city = %(city)s, state = %(state)s, zip_code = %(zip_code)s, workout_plan = %(workout_plan)s, schedule = %(schedule)s WHERE id=%(id)s",data)

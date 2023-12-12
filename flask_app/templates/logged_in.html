@@ -17,20 +17,24 @@
         <table>
             <thead>
                 <th>
-                    Gym
+                    Where
                 </th>
                 <th> 
-                    Routine/Split
+                    What
                 </th>
                 <th>
-                    Weekly Schedule
+                    When
+                </th>
+                <th>
+                    Display
                 </th>
             </thead>
             {% for plan in host_plans %}
             <tr>
-                <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
+                <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
                 <td>{{plan['workout_plan']}}</td>
                 <td>{{plan['schedule']}}</td>
+                <td><a href="/GymBuddies/display/{{plan['id']}}">View Your plan</a></td>
             </tr>
             {% endfor %}
         </table>
@@ -43,29 +47,29 @@
         <table>
             <thead>
                 <th>
-                    Gym
+                    Where
                 </th>
                 <th> 
-                    Routine/Split
+                    What
                 </th>
                 <th>
-                    Weekly Schedule
+                    When
                 </th>
                 <th>
-                    Join
+                    Display
                 </th>
             </thead>
             {% for plan in buddy_plans %}
             <tr>
-                <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
+                <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
                 <td>{{plan['workout_plan']}}</td>
                 <td>{{plan['schedule']}}</td>
-                <td><a href="/GymBuddies/display/{{plan['id']}}">Join this plan</a></td>
+                <td><a href="/GymBuddies/display/{{plan['id']}}">View this plan</a></td>
             </tr>
             {% endfor %}
         </table>
         {% else %}
-        <h2>You haven't joined  any plans yet.</h2>
+        <h3>You haven't joined  any plans yet.</h3>
         {% endif %}
 
     </div>
@@ -75,13 +79,13 @@
         <table>
             <thead>
                 <th>
-                    Gym
+                    Where
                 </th>
                 <th> 
-                    Routine/Split
+                    What
                 </th>
                 <th>
-                    Weekly Schedule
+                    When
                 </th>
                 <th>
                     Join
@@ -89,7 +93,7 @@
             </thead>
             {% for plan in nobuddy_plans %}
             <tr>
-                <td>{{plan['gym_name']}} in {{plan['city']}} {{plan['state']}}</td>
+                <td>{{plan['gym_name']}} in {{plan['city']}}, {{plan['state']}}</td>
                 <td>{{plan['workout_plan']}}</td>
                 <td>{{plan['schedule']}}</td>
                 <td><a href="/GymBuddies/display/{{plan['id']}}">Join this plan</a></td>
@@ -97,7 +101,7 @@
             {% endfor %}
         </table>
         {% else %}
-        <h2>There are no user created plans yet.</h2>
+        <h3>There are no user created plans avaible to join.</h3>
         {% endif %}
     </div>
 </body>
