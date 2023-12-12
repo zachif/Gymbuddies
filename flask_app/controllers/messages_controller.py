@@ -2,7 +2,7 @@ from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.messages_model import Messages
 
-@app.rout('/GymBuddies/message/host/<int:plan_id>')
+@app.route('/GymBuddies/message/host/<int:plan_id>', methods=["POST"])
 def hostMessage(plan_id):
     data = {
         "content":request.form['content'],
@@ -13,8 +13,8 @@ def hostMessage(plan_id):
     print(result)
     return redirect('/GymBuddies/display/' + str(plan_id))
 
-@app.rout('/GymBuddies/message/buddy/<int:plan_id>')
-def hostMessage(plan_id):
+@app.route('/GymBuddies/message/buddy/<int:plan_id>', methods=["POST"])
+def buddyMessage(plan_id):
     data = {
         "content":request.form['content'],
         "sender":"buddy",

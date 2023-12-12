@@ -30,17 +30,18 @@
     {%if buddy%}
     <div>
         <h2>Messages</h2>
+        <a href="/GymBuddies/display/{{plan['id']}}">Refresh</a>
         {%if messages%}
         {% for message in messages %}
         {%if message['sender']=="host"%}
-        <div style="color: rgb(3, 128, 101)" class="hostMessage">{{message[content]}}</div>
+        <div style="color: rgb(3, 128, 101)" class="hostMessage">{{message['content']}}</div>
         {%else%}
-        <div style="color: rgb(255, 187, 0)" class="buddyMessage">{{message[content]}}</div>
+        <div style="color: rgb(255, 187, 0)" class="buddyMessage">{{message['content']}}</div>
         {%endif%}
         {%endfor%}
         {%endif%}
     </div>
-    {%if user_id != host['id']%}
+    {%if user_id == host['id']%}
     <form action="/GymBuddies/message/host/{{plan['id']}}" method="post">
         <div>
             <textarea name="content" rows="1" cols="20" placeholder="message"></textarea>
@@ -48,7 +49,7 @@
         </div>
     </form>
     {%else%}
-    <form action="/GymBuddies/message/host/{{plan['id']}}" method="post">
+    <form action="/GymBuddies/message/buddy/{{plan['id']}}" method="post">
         <div>
             <textarea name="content" rows="1" cols="20" placeholder="message"></textarea>
             <input type="submit" value="send" />
@@ -58,8 +59,10 @@
     {%endif%}
 
 
-    {%if buddy%}
+    {%if buddy %}
+    {%if user_id != host['id']%}
     <a href="/GymBuddies/remove/{{plan['id']}}">Leave {{host['first_name']}}'s Plan</a>
+    {%endif%}
     {%else%}
     {%if user_id != host['id']%}
     <a href="/GymBuddies/add/{{plan['id']}}">Join {{host['first_name']}}'s training plan</a>

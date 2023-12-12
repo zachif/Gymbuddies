@@ -35,6 +35,7 @@ def display(plan_id):
     print (result)
     result=Messages.get_messages_by_plan(data)
     print (result)
+    print("##################################################################")
     return render_template("display.html", user_id=session["id"],plan=(Workout_Plans.get_workout_by_id(data))[0], host=(Workout_Plans.get_workout_host(data))[0], buddy=(Workout_Plans.get_workout_buddy(data)), messages=(Messages.get_messages_by_plan(data)))
 
 @app.route('/GymBuddies/add/<int:plan_id>')
@@ -53,6 +54,7 @@ def removeBuddy(plan_id):
     }
     result=Workout_Plans.remove_buddy(data)
     result=Messages.delete_messages_by_plan(data)
+    print("#####################################################")
     return redirect('/GymBuddies/display/' + str(plan_id))
 
 @app.route('/GymBuddies/edit/<int:plan_id>')

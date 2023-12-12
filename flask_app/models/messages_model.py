@@ -21,7 +21,7 @@ class Messages:
     
     @classmethod
     def delete_messages_by_plan(cls, data):
-        result=connectToMySQL(db).query_db("DELET FROM messages WHERE plan_id=%(plan_id)s", data)
+        result=connectToMySQL(db).query_db("DELETE FROM messages WHERE plan_id=%(plan_id)s", data)
         print(result)
         return result
 
