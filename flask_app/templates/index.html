@@ -4,14 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gym Buddies</title>
     <link rel="stylesheet" href="../static/login_registration.css">
 </head>
 
 <body>
+    <div class="title_bar_containter">
+        <h1 class="title">GYM BUDDIES</h1>
+        <h2 class="tag_line">The spot to find your spotter</h2>
+    </div>
     <div class="container">
-        <div>
-            <div class="fcontainer"></div>
+        <div class="form_container">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             {% for message in messages %}
@@ -23,57 +26,49 @@
             {% endwith %}
             <h2 class="formTitle">Register</h2>
             <form action="/register" method="post">
-                <div>
-                    <label for="first_name">First Name:</label>
-                    <input type="text" name="first_name"/>
+                <div class="_form">
+                    <div class="form_column">
+                        <p><label for="first_name">First Name:</label></p>
+                        <p><label for="last_name">Last Name:</label></p>
+                        <p><label for="email">Email:</label></p>
+                        <p><label for="password">Password:</label></p>
+                        <p><label for="confirm_password">Confirm Password:</label></p>
+                    </div>
+                    <div class="form_column">
+                        <p><input type="text" name="first_name" /></p>
+                        <p><input type="text" name="last_name" /></p>
+                        <p><input type="email" name="email" /></p>
+                        <p><input type="password" name="password" /></p>
+                        <p><input type="password" name="confirm_password" /></p>
+                    </div>
                 </div>
-                <div>
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" name="last_name"/>
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="email" name="email"/>
-                </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" name="password"/>
-                </div>
-                <div>
-                    <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" name="confirm_password"/>
-                </div>
-                <div>
-                    <input type="submit" value="Register"/>
-                </div>
+                <input class="submit_button" type="submit" value="Register" />
             </form>
         </div>
-        <div>
+
+        <div class="form_container">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
-            {% for message in messages %}
-            {%if message == "Your password or email doesn't match."%}
-            <p class="vMessage">{{message}}</p>
+            {%if messages[0] == "Your password or email doesn't match."%}
+            <p class="vMessage">{{messages[0]}}</p>
             {% endif %}
-            {% endfor %}
             {% endif %}
             {% endwith %}
             <h2 class="formTitle">Login</h2>
-            <div class="fcontainer">
-                <form action="/login" method="post">
-                    <div>
-                        <label for="lemail">Email:</label>
-                        <input type="email" name="lemail"/>
+            <form action="/login" method="post">
+                <div class="_form">
+                    <div class="form_column">
+                        <p><label for="lemail">Email:</label></p>
+                        <p><label for="lpassword">Password:</label></p>
                     </div>
-                    <div>
-                        <label for="lpassword">Password:</label>
-                        <input type="text" name="lpassword"/>
+                    <div class="form_column">
+                        <p><input type="email" name="lemail" /></p>
+                        <p><input type="password" name="lpassword" /></p>
                     </div>
-                    <div>
-                        <input type="submit" value="Login"/>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <input class="submit_button" type="submit" value="Login" />
+            </form>
+
         </div>
     </div>
 </body>

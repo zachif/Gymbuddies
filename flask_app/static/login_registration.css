@@ -1,18 +1,87 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: rgb(46, 46, 46);
+}
+
 .fcontainer{
     display:flex;
     justify-content: space-between;
+
 }
 
 .formTitle{
     display: block;
+    text-align: center;
+    padding-bottom: 5px;
 }
 
 .container{
     display:flex;
     justify-content: space-evenly;
+    margin: auto;
     width: 700px;
+    padding-top: 10px;
 }
 
 .vMessage{
     color: red;
+}
+
+h2{
+    color: whitesmoke;
+}
+
+.title_bar_container{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0, 0, 78);
+}
+
+.title{
+    text-align: center;
+    background-color: rgb(0, 0, 78);
+    padding: 10px;
+    color: whitesmoke;
+}
+
+.tag_line{
+    text-align: center;
+    background-color: rgb(28, 28, 95);
+    padding: 10px; 
+    color: lightgray;
+}
+
+.form_column{
+    display: block;
+}
+
+._form{
+    display: flex;
+    justify-content: space-between;
+}
+
+.form_column p{
+    height: 20.7px;
+    margin: 0px 2px;
+}
+
+.form_column p label{
+    color: whitesmoke;
+}
+
+.form_container {
+    background-color: rgb(0, 0, 56);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.submit_button {
+    background-color: rgb(46, 46, 158);
+    color: whitesmoke;
+    padding: 5px;
+    border-radius: 5px;
 }

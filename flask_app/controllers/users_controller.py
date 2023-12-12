@@ -30,7 +30,7 @@ def login():
     }
     current_user=Users.login_user(data)
     if not current_user:
-        return redirect('/')
+        return redirect('/GymBuddies')
     session['id']=current_user
     return redirect('/GymBuddies/dashboard')
 
