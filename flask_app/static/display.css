@@ -7,3 +7,61 @@
 body{
     background-color: rgb(46, 46, 46);
 }
+
+.submit_button {
+    background-color: rgb(46, 46, 158);
+    color: whitesmoke;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.heading_container{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: rgb(0, 0, 78);
+}
+
+.info_container{
+    display: flex;
+    justify-content: center;
+}
+
+.info{
+    width: 700px;
+    padding: 15px;
+    background-color: rgb(46, 46, 158);
+}
+
+.small_info p{
+    background-color: rgb(0, 0, 56);
+    padding: 10px;
+    margin: 10px;
+}
+
+.messages_container{
+    display: flex;
+    justify-content: center;
+}
+
+.messages{
+    width: 700px;
+    padding: 15px;
+    background-color: rgb(46, 46, 158);
+}
+
+.message_feild{
+    background-color: black;
+}
+
+.message_box{
+    background-color: lightgray;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.action_buttons{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}

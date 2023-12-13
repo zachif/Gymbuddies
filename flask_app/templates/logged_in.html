@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GymBuddies</title>
-    <link rel="stylesheet" href="../static/logged_in.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='logged_in.css') }}">
 </head>
 
 <body>
@@ -47,7 +47,9 @@
                 </table>
                 {% else %}
                 <h2> You haven't created a workout plan yet.</h2>
-                <a href="/GymBuddies/create">Create a Plan</a>
+                <form action="/GymBuddies/create">
+                    <input class="submit_button" type="submit" value="Create a Plan">
+                </form>
                 {% endif %}
             </div>
         </div>

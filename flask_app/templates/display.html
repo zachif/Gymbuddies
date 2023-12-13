@@ -6,71 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GymBuddies</title>
     <link rel="stylesheet" href="../static/display.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='display.css') }}">
 </head>
 
 <body>
-    <a href="/GymBuddies/dashboard">Dashboard</a>
-    <div>
-        <h1>
-            About {{host['first_name']}}'s training plan:
-        </h1>
+    <div class="heading_container">
+        <h2>{{host['first_name']}}'s training plan:</h2>
+        <form action="/GymBuddies/dashboard">
+            <input class="submit_button" type="submit" value="Dashboard">
+        </form>
     </div>
-    <div>
-        <h2>What:</h2>
-        <p>{{plan['workout_plan']}}</p>
-        <h2>When:</h2>
-        <p>{{plan['schedule']}}</p>
-        <h2>Where:</h2>
-        <p>{{plan['gym_name']}}</p>
-        <p>Address: {{plan['address']}}</p>
-        <p>City: {{plan['city']}}</p>
-        <p>State: {{plan['state']}}</p>
-        <p>Zip Code: {{plan['zip_code']}}</p>
+    <div class="info_container">
+        <div class="info">
+            <div class="small_info">
+                <h2>What:</h2>
+                <p>{{plan['workout_plan']}}</p>
+            </div>
+            <div class="small_info">
+                <h2>When:</h2>
+                <p>{{plan['schedule']}}</p>
+            </div>
+            <div class="small_info">
+                <h2>Where:</h2>
+                <p>{{plan['gym_name']}}</p>
+                <p>Address: {{plan['address']}}</p>
+                <p>City: {{plan['city']}}</p>
+                <p>State: {{plan['state']}}</p>
+                <p>Zip Code: {{plan['zip_code']}}</p>
+            </div>
+        </div>
     </div>
-
     {%if buddy%}
-    <div>
-        <h2>Messages</h2>
-        <a href="/GymBuddies/display/{{plan['id']}}">Refresh</a>
-        {%if messages%}
-        {% for message in messages %}
-        {%if message['sender']=="host"%}
-        <div style="color: rgb(3, 128, 101)" class="hostMessage">{{message['content']}}</div>
-        {%else%}
-        <div style="color: rgb(255, 187, 0)" class="buddyMessage">{{message['content']}}</div>
+    <div class="messages_container">
+        <div class="messages">
+            <div>
+                <h2>Messages</h2>
+                <form action="/GymBuddies/display/{{plan['id']}}">
+                    <input class="submit_button" type="submit" value="Refresh">
+                </form>
+                <div class="message_box">
+                    {%if messages%}
+                    {% for message in messages %}
+                    {%if message['sender']=="host"%}
+                    <div style="color: rgb(0, 0, 56)" class="hostMessage">{{host['first_name']}}: {{message['content']}}
+                    </div>
+                    {%else%}
+                    <div style="color: rgb(0, 0, 56)" class="buddyMessage">{{buddy[0]['first_name']}}:
+                        {{message['content']}}</div>
+                    {%endif%}
+                    {%endfor%}
+                    {%endif%}
+                </div>
+            </div>
+            {%if user_id == host['id']%}
+            <form action="/GymBuddies/message/host/{{plan['id']}}" method="post">
+                <div>
+                    <textarea name="content" rows="1" cols="20" placeholder="message" class="message_feild"></textarea>
+                    <input class="submit_button" type="submit" value="send" />
+                </div>
+            </form>
+            {%else%}
+            <form action="/GymBuddies/message/buddy/{{plan['id']}}" method="post">
+                <div>
+                    <textarea name="content" rows="1" cols="20" placeholder="message" class="message_feild"></textarea>
+                    <input class="submit_button" type="submit" value="send" />
+                </div>
+            </form>
+            {%endif%}
+        </div>
+    </div>
+    {%endif%}
+
+
+    <div class="action_buttons">
+        {%if buddy %}
+        {%if user_id != host['id']%}
+        <form action="/GymBuddies/remove/{{plan['id']}}">
+            <input class="submit_button" type="submit" value="Leave {{host['first_name']}}'s Plan">
+        </form>
         {%endif%}
-        {%endfor%}
+        {%else%}
+        {%if user_id != host['id']%}
+        <form action="/GymBuddies/add/{{plan['id']}}">
+            <input class="submit_button" type="submit" value="Join {{host['first_name']}}'s training plan">
+        </form>
+        {%else%}
+        <form action="/GymBuddies/edit/{{plan['id']}}">
+            <input class="submit_button" type="submit" value="Edit">
+        </form>
+        {%endif%}
         {%endif%}
     </div>
-    {%if user_id == host['id']%}
-    <form action="/GymBuddies/message/host/{{plan['id']}}" method="post">
-        <div>
-            <textarea name="content" rows="1" cols="20" placeholder="message"></textarea>
-            <input type="submit" value="send" />
-        </div>
-    </form>
-    {%else%}
-    <form action="/GymBuddies/message/buddy/{{plan['id']}}" method="post">
-        <div>
-            <textarea name="content" rows="1" cols="20" placeholder="message"></textarea>
-            <input type="submit" value="send" />
-        </div>
-    </form>
-    {%endif%}
-    {%endif%}
-
-
-    {%if buddy %}
-    {%if user_id != host['id']%}
-    <a href="/GymBuddies/remove/{{plan['id']}}">Leave {{host['first_name']}}'s Plan</a>
-    {%endif%}
-    {%else%}
-    {%if user_id != host['id']%}
-    <a href="/GymBuddies/add/{{plan['id']}}">Join {{host['first_name']}}'s training plan</a>
-    {%else%}
-    <a href="/GymBuddies/edit/{{plan['id']}}">edit</a>
-    {%endif%}
-    {%endif%}
 </body>
 
 </html>
