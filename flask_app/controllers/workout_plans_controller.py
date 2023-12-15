@@ -22,7 +22,9 @@ def create():
     valid=Workout_Plans.create_workout_plan(data)
     print('_________________________________________________________')
     print (valid)
-    return redirect("/GymBuddies/dashboard")
+    if valid:
+        return redirect("/GymBuddies/dashboard")
+    return('/GymBuddies/create')
 
 @app.route('/GymBuddies/display/<int:plan_id>')
 def display(plan_id):
@@ -76,6 +78,8 @@ def updatePlan(plan_id):
         "workout_plan":request.form['workout_plan'],
         "schedule":request.form['schedule']
     }
-    result=Workout_Plans.update_plan(data)
-    print(result)
-    return redirect('/GymBuddies/display/' + str(plan_id))
+    valid=Workout_Plans.update_plan(data)
+    print(valid)
+    if valid:
+        return redirect('/GymBuddies/display/' + str(plan_id))
+    return redirect('/GymBuddies/edit/' + str(plan_id))

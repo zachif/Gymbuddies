@@ -53,3 +53,7 @@ body{
 .address_fields{
     padding: 10px;
 }
+
+textarea {
+    background-color: rgb(0, 0, 56);
+}

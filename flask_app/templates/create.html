@@ -17,13 +17,6 @@
     </div>
     <div class="form_container_container">
         <div class="form_container">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            {% for message in messages %}
-            <p class="vMessage">{{message}}</p>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
             <form action="/create" method="post">
                 <div class="address_fields">
                     <h2>Where do you work out?</h2>
@@ -65,6 +58,13 @@
             </form>
         </div>
     </div>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <p class="vMessage">{{message}}</p>
+            {% endfor %}
+            {% endif %}
+    {% endwith %}
 </body>
 
 </html>

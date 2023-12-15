@@ -88,4 +88,28 @@ class Workout_Plans:
     
     @classmethod
     def update_plan(cls, data):
-        return connectToMySQL(db).query_db("UPDATE workout_plan SET gym_name = %(gym_name)s, address = %(address)s, city = %(city)s, state = %(state)s, zip_code = %(zip_code)s, workout_plan = %(workout_plan)s, schedule = %(schedule)s WHERE id=%(id)s",data)
+        valid=True
+        if len(data['gym_name']) < 3:
+            flash("Gym name must be atleast 3 characters.")
+            valid=False
+        if len(data['workout_plan']) < 20 and len(data['workout_plan']) > 500:
+            flash("Workout plan must be between 20 and 500 characters.")
+            valid=False
+        if not (data['address']):
+            flash("Address required.")
+            valid=False
+        if not (data['city']):
+            flash("City required.")
+            valid=False
+        if not (data['state']):
+            flash("State required.")
+            valid=False
+        if not (data['zip_code']):
+            flash("Zip code required.")
+            valid=False
+        if len(data['schedule']) < 20 and len(data['workout_plan']) > 500:
+            flash("Schedule must be between 20 and 500 characters.")
+            valid=False
+        if valid:
+            connectToMySQL(db).query_db("UPDATE workout_plan SET gym_name = %(gym_name)s, address = %(address)s, city = %(city)s, state = %(state)s, zip_code = %(zip_code)s, workout_plan = %(workout_plan)s, schedule = %(schedule)s WHERE id=%(id)s",data)
+            return valid
